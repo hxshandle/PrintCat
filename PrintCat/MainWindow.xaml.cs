@@ -24,6 +24,7 @@ namespace PrintCat
         public MainWindow()
         {
             InitializeComponent();
+            FolderSpy spyer = new FolderSpy();
             try
             {
               List<Image> imageList = new List<Image>();
