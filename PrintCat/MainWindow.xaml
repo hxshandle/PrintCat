@@ -1,0 +1,19 @@
+﻿<controls:MetroWindow x:Class="PrintCat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="三菱打印系统" Height="350" Width="525" ShowIconOnTitleBar="True">
+  <Grid ShowGridLines="True">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="100"></RowDefinition>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
+    </Grid.RowDefinitions>
+    <ScrollViewer Grid.Row="2">
+      <ListView>
+        
+      </ListView>
+    </ScrollViewer>
+
+  </Grid>
+</controls:MetroWindow>
