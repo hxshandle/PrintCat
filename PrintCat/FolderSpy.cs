@@ -12,7 +12,7 @@ namespace PrintCat
     private List<FileInfo> imageList = new List<FileInfo>();
     private string[] extensions = { ".jpg", ".png", ".jpeg" };
 
-    static String spyPath = "g:\\tmp";
+    static String spyPath = PrintCat.Properties.Settings.Default.SpyFolder;
 
 
     public FolderSpy()

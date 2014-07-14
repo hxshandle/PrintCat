@@ -24,19 +24,8 @@ namespace PrintCat
         public MainWindow()
         {
             InitializeComponent();
-            FolderSpy spyer = new FolderSpy();
-            try
-            {
-              List<Image> imageList = new List<Image>();
-            }
-            catch (Exception ex)
-            {
-              Console.WriteLine("Exception ->"+ex.Message);
-            }
-            finally
-            {
-
-            }
+            ImageListView imageListView = new ImageListView(lstImage);
+           
         }
     }
 }
