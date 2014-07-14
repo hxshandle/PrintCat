@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace PrintCat
 {
@@ -25,7 +26,16 @@ namespace PrintCat
         {
             InitializeComponent();
             ImageListView imageListView = new ImageListView(lstImage);
-           
+         
+          
+        }
+        void list_image_item_double_click(object sender, MouseButtonEventArgs e)
+        {
+          var item = ((Image)e.OriginalSource).Source;
+          if (item != null)
+          {
+            MessageBox.Show("double click-"+item);
+          }
         }
     }
 }
