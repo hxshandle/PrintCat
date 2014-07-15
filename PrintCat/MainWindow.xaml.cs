@@ -29,12 +29,13 @@ namespace PrintCat
          
           
         }
+
         void list_image_item_double_click(object sender, MouseButtonEventArgs e)
         {
           var item = ((Image)e.OriginalSource).Source;
           if (item != null)
           {
-            MessageBox.Show("double click-"+item);
+            MessageBox.Show("double click-" + item);
           }
         }
     }
