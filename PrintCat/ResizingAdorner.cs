@@ -37,6 +37,8 @@ namespace PrintCat
       topRight.DragDelta += new DragDeltaEventHandler(HandleTopRight);
     }
 
+    //private double _limit
+
     // Handler for resizing from the bottom-right.
     void HandleBottomRight(object sender, DragDeltaEventArgs args)
     {

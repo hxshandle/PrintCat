@@ -3,7 +3,7 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"         
         xmlns:local="clr-namespace:PrintCat"
-        Title="三菱打印系统" Height="768" Width="1024" ShowIconOnTitleBar="True" EnableDWMDropShadow="True">
+        Title="三菱打印系统" Height="600" Width="800" ShowIconOnTitleBar="True" EnableDWMDropShadow="True">
   <Grid ShowGridLines="True">
     <Grid.RowDefinitions>
       <RowDefinition Height="100"></RowDefinition>
