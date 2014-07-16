@@ -3,10 +3,11 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"         
         xmlns:local="clr-namespace:PrintCat"
+        Icon="cat.ico"
         Title="三菱打印系统" Height="600" Width="800" ShowIconOnTitleBar="True" EnableDWMDropShadow="True">
   <Grid ShowGridLines="True">
     <Grid.RowDefinitions>
-      <RowDefinition Height="100"></RowDefinition>
+      <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="*"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
@@ -17,7 +18,7 @@
         <ColumnDefinition Width="300"></ColumnDefinition>
       </Grid.ColumnDefinitions>
       
-      <local:ImageProjcessControl></local:ImageProjcessControl>
+      <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
       <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></GridSplitter>
 
     </Grid>

@@ -32,11 +32,16 @@ namespace PrintCat
 
         void list_image_item_double_click(object sender, MouseButtonEventArgs e)
         {
-          var item = ((Image)e.OriginalSource).Source;
-          if (item != null)
+          
+          try
           {
-            MessageBox.Show("double click-" + item);
-          }
+            Image image = (Image)e.OriginalSource;
+            String source = image.Source.ToString();
+            theImageControl.clearSelectBox();
+            theImageControl.setDisplayImage(new BitmapImage(new Uri(source)));
+          }catch(Exception ex){
+            return;
+          } 
         }
     }
 }

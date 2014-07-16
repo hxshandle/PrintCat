@@ -15,6 +15,25 @@ using System.Windows.Shapes;
 
 namespace PrintCat
 {
+
+  public class ImageDimension
+  {
+    public double width { get; set; }
+    public double height { get; set; }
+    // if isLandscape is true means the width is full.
+    public bool isLandscape { get; set; }
+    public double left { get; set; }
+    public double top { get; set; }
+
+    public ImageDimension(double w,double h,double l,double t, bool isL)
+    {
+      this.width = w;
+      this.height = h;
+      this.left = l;
+      this.top = t;
+      this.isLandscape = isL;
+    }
+  }
   /// <summary>
   /// Interaction logic for ImageProjcessControl.xaml
   /// </summary>
@@ -25,11 +44,12 @@ namespace PrintCat
       InitializeComponent();
     }
     AdornerLayer aLayer;
-
+    bool hasImage = false;
     bool mouseDown = false; // Set to 'true' when mouse is held down.
     Point mouseDownPos; // The point where the mouse button was clicked down.
     bool isMoveRectangle = false;
     Point selectBoxPos = new Point();
+    ImageDimension imageDimension = null;
 
     private bool isRectangleMove(MouseButtonEventArgs e)
     {
@@ -52,6 +72,7 @@ namespace PrintCat
 
     private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
     {
+      if (!hasImage) return;
       // Capture and track the mouse.
       isMoveRectangle = isRectangleMove(e);
       mouseDown = true;
@@ -137,8 +158,10 @@ namespace PrintCat
 
     private Point _adjustMousePos(Point pos, double offsetX = 0, double offsetY = 0)
     {
-      double _w = theCanvas.ActualWidth - offsetX;
-      double _h = theCanvas.ActualHeight - offsetY;
+      Dictionary<String, double> canvasDim = _getCanvasDim();
+
+      double _w = canvasDim["Width"] - offsetX;
+      double _h = canvasDim["Height"] - offsetY;
       pos.Y = pos.Y > _h ? _h : pos.Y;
       pos.Y = pos.Y < 0 ? 0 : pos.Y;
       pos.X = pos.X < 0 ? 0 : pos.X;
@@ -164,6 +187,68 @@ namespace PrintCat
         }
 
       }
+    }
+
+    internal void clearSelectBox()
+    {
+      selectionBox.Width = 0;
+      selectionBox.Height = 0;
+      selectionBox.Visibility = Visibility.Collapsed;
+    }
+
+    private Dictionary<String,double> _getCanvasDim(){
+      Dictionary<String,double> result = new Dictionary<String,double>();
+      result.Add("Width", theCanvas.ActualWidth);
+      result.Add("Height", theCanvas.ActualHeight);
+      return result;
+
+    }
+
+
+    internal void setDisplayImage(BitmapImage bitmapImage)
+    {
+      double _imageW = bitmapImage.Width;
+      double _imageH = bitmapImage.Height;
+      hasImage = true;
+
+      Dictionary<String, double> canvasDim = _getCanvasDim();
+      imageDimension= getImageDim(_imageW, _imageH);
+      
+      Console.WriteLine(_imageW + " : " + _imageH);
+      theImage.Source = bitmapImage;
+      theImage.Width = imageDimension.width;
+      theImage.Height = imageDimension.height;
+      Canvas.SetLeft(theImage, imageDimension.left);
+      Canvas.SetTop(theImage, imageDimension.top);
+
+    }
+
+    private ImageDimension getImageDim(double imageWidth, double ImageHeight)
+    {
+      Dictionary<String, double> canvasDim = _getCanvasDim();
+      ImageDimension result = null;
+      double canvasWidth = canvasDim["Width"];
+      double canvasHeight = canvasDim["Height"];
+      if (imageWidth > ImageHeight)
+      {
+        // 水平照片
+        double newHeight = canvasWidth * ImageHeight / imageWidth;
+        result = new ImageDimension(canvasWidth, newHeight, 0, (canvasHeight - newHeight) / 2, true);
+        if (newHeight > canvasHeight)
+        {
+          double newWidth = canvasHeight * imageWidth / ImageHeight;
+          // 这里还是垂直照片
+          result = new ImageDimension(newWidth, canvasHeight, (canvasWidth - newWidth) / 2, 0, false);
+        }
+       
+      }
+      else
+      {
+        // 垂直照片
+        double newWidth = canvasHeight * imageWidth / ImageHeight;
+        result = new ImageDimension(newWidth, canvasHeight, (canvasWidth - newWidth) / 2, 0, false);
+      }
+      return result;
     }
   }
 }

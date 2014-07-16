@@ -12,6 +12,9 @@
               MouseDown="Grid_MouseDown"
               MouseUp="Grid_MouseUp"
               MouseMove="Grid_MouseMove">
+    <Image
+      Name="theImage"
+      ></Image>
     <Rectangle
             x:Name="selectionBox"
             Visibility="Collapsed"
