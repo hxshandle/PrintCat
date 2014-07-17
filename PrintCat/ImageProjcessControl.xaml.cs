@@ -215,6 +215,7 @@ namespace PrintCat
     {
       double _imageW = bitmapImage.Width;
       double _imageH = bitmapImage.Height;
+      theCanvas.Cursor = Cursors.Cross;
       hasImage = true;
 
       Dictionary<String, double> canvasDim = _getCanvasDim();
