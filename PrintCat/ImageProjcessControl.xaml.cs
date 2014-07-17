@@ -160,12 +160,18 @@ namespace PrintCat
     {
       Dictionary<String, double> canvasDim = _getCanvasDim();
 
-      double _w = canvasDim["Width"] - offsetX;
-      double _h = canvasDim["Height"] - offsetY;
-      pos.Y = pos.Y > _h ? _h : pos.Y;
-      pos.Y = pos.Y < 0 ? 0 : pos.Y;
-      pos.X = pos.X < 0 ? 0 : pos.X;
-      pos.X = pos.X > _w ? _w : pos.X;
+
+
+      //double _w = canvasDim["Width"] - offsetX;
+      //double _h = canvasDim["Height"] - offsetY;
+      double _leftEdgeX = imageDimension.left;
+      double _topEdgeY = imageDimension.top;
+      double _rightEdgeX = imageDimension.left + imageDimension.width-offsetX;
+      double _botttomEdgeY = imageDimension.top + imageDimension.height - offsetY;
+      pos.Y = pos.Y > _botttomEdgeY ? _botttomEdgeY : pos.Y;
+      pos.Y = pos.Y < _topEdgeY ? _topEdgeY : pos.Y;
+      pos.X = pos.X < _leftEdgeX ? _leftEdgeX : pos.X;
+      pos.X = pos.X > _rightEdgeX ? _rightEdgeX : pos.X;
       return pos;
     }
 
@@ -205,7 +211,7 @@ namespace PrintCat
     }
 
 
-    internal void setDisplayImage(BitmapImage bitmapImage)
+    internal void setDisplayImage(BitmapSource bitmapImage)
     {
       double _imageW = bitmapImage.Width;
       double _imageH = bitmapImage.Height;
@@ -220,7 +226,6 @@ namespace PrintCat
       theImage.Height = imageDimension.height;
       Canvas.SetLeft(theImage, imageDimension.left);
       Canvas.SetTop(theImage, imageDimension.top);
-
     }
 
     private ImageDimension getImageDim(double imageWidth, double ImageHeight)
@@ -249,6 +254,25 @@ namespace PrintCat
         result = new ImageDimension(newWidth, canvasHeight, (canvasWidth - newWidth) / 2, 0, false);
       }
       return result;
+    }
+    //点击剪裁
+    private void btn_crop_Click(object sender, RoutedEventArgs e)
+    {
+      Console.WriteLine("image source "+theImage.Source.GetType().Name);
+      BitmapSource bitmapSource = theImage.Source as BitmapSource;
+      double scaleX = bitmapSource.Width / imageDimension.width;
+      double scaleY = bitmapSource.Height / imageDimension.height;
+      int width = (int)(selectionBox.Width * scaleX);
+      int height = (int)(selectionBox.Height * scaleY);
+      double selectBoxLeft = Canvas.GetLeft(selectionBox);
+      double selectBoxTop = Canvas.GetTop(selectionBox);
+      int left = (int)((selectBoxLeft - imageDimension.left) * scaleX);
+      int top = (int)((selectBoxTop - imageDimension.top) * scaleY);
+      CroppedBitmap croppedBitmap = new CroppedBitmap(bitmapSource, new Int32Rect(left, top, width, height));
+      Console.WriteLine(left + " , " + top + " , " + width + " , " + height);
+      setDisplayImage(croppedBitmap);
+      clearSelectBox();
+
     }
   }
 }

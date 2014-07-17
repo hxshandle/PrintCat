@@ -5,7 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-  <Canvas Grid.Column="0" 
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="50"></ColumnDefinition>
+      <ColumnDefinition></ColumnDefinition>
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Column="0" Background="#CC475059" Width="60" Margin="10,10,0,10" HorizontalAlignment="Center">
+      <Button Content="剪裁" VerticalAlignment="Center" Margin="5,0" Width="40" UseLayoutRounding="True" BorderBrush="{x:Null}" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="btn_crop_Click"/>
+
+    </StackPanel>
+  <Canvas Grid.Column="1" 
               Name="theCanvas"
               Background="#FF128742" 
               Margin="10"
@@ -22,4 +32,5 @@
             StrokeThickness="1"
             />
   </Canvas>
+  </Grid>
 </UserControl>
