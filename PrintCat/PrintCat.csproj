@@ -83,6 +83,7 @@
     </ApplicationDefinition>
     <Compile Include="CurrentImageHandler.cs" />
     <Compile Include="ImageFitler.cs" />
+    <Compile Include="ImageHelper.cs" />
     <Compile Include="ImageProjcessControl.xaml.cs">
       <DependentUpon>ImageProjcessControl.xaml</DependentUpon>
     </Compile>

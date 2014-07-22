@@ -35,11 +35,11 @@ namespace PrintCat
             filter.Red = new IntRange(100, 255);
             filter.Green = new IntRange(20, 100);
             filter.Blue = new IntRange(1, 100);
+            Bitmap bitmap = ImageHelper.BitmapFromSource(currentImageHandler.CurrentImage.Source as BitmapSource);
             
-            //System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap;
-            //filter.ApplyInPlace(currentImageHandler.CurrentImage.Source);
-
-            System.Windows.MessageBox.Show(bp.ToString());
+            filter.ApplyInPlace(bitmap);
+            BitmapSource newBitmapSouce = ImageHelper.ConvertBitmap(bitmap);
+            this.currentImageHandler.CurrentImage.Source = newBitmapSouce;
         }
     }
 }
