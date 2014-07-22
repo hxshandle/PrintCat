@@ -13,8 +13,9 @@
 
     <StackPanel Grid.Column="0" Background="#CC475059" Width="60" Margin="10,10,0,10" HorizontalAlignment="Center">
       <Button Content="剪裁" VerticalAlignment="Center" Margin="5,0" Width="40" UseLayoutRounding="True" BorderBrush="{x:Null}" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="btn_crop_Click"/>
+            <Button Content="Filter" VerticalAlignment="Center" Margin="5,0" Width="40" UseLayoutRounding="True" BorderBrush="{x:Null}" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="Button_Filter_Click"/>
 
-    </StackPanel>
+        </StackPanel>
   <Canvas Grid.Column="1" 
               Name="theCanvas"
               Background="#FF128742" 

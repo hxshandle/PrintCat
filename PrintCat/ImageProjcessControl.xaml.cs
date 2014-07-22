@@ -50,6 +50,7 @@ namespace PrintCat
     bool isMoveRectangle = false;
     Point selectBoxPos = new Point();
     ImageDimension imageDimension = null;
+    CurrentImageHandler currentImageHandler = null;
 
     private bool isRectangleMove(MouseButtonEventArgs e)
     {
@@ -227,6 +228,8 @@ namespace PrintCat
       theImage.Height = imageDimension.height;
       Canvas.SetLeft(theImage, imageDimension.left);
       Canvas.SetTop(theImage, imageDimension.top);
+      this.currentImageHandler = new CurrentImageHandler(theImage);
+
     }
 
     private ImageDimension getImageDim(double imageWidth, double ImageHeight)
@@ -274,6 +277,11 @@ namespace PrintCat
       setDisplayImage(croppedBitmap);
       clearSelectBox();
 
+    }
+
+    private void Button_Filter_Click(object sender, RoutedEventArgs e)
+    {
+        this.currentImageHandler.ColorFitler.ExecuteFitler();
     }
   }
 }
