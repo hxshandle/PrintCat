@@ -281,7 +281,15 @@ namespace PrintCat
 
     private void Button_Filter_Click(object sender, RoutedEventArgs e)
     {
-        this.currentImageHandler.ColorFitler.ExecuteFitler();
+        //currentImageHandler.ColorFitler.ExecuteFitler();
+    }
+
+    internal void ExceRGBFilter(List<ColorRange> filters)
+    {
+        if (currentImageHandler != null)
+        {
+          currentImageHandler.ColorFitler.ExecuteFitler(filters);
+        }
     }
   }
 }
