@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AForge.Imaging.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace PrintCat
     public double left { get; set; }
     public double top { get; set; }
 
-    public ImageDimension(double w,double h,double l,double t, bool isL)
+    public ImageDimension(double w, double h, double l, double t, bool isL)
     {
       this.width = w;
       this.height = h;
@@ -43,6 +44,7 @@ namespace PrintCat
     {
       InitializeComponent();
     }
+    public bool HasImage { get { return this.hasImage; } }
     AdornerLayer aLayer;
     bool hasImage = false;
     bool mouseDown = false; // Set to 'true' when mouse is held down.
@@ -51,6 +53,7 @@ namespace PrintCat
     Point selectBoxPos = new Point();
     ImageDimension imageDimension = null;
     CurrentImageHandler currentImageHandler = null;
+
 
     private bool isRectangleMove(MouseButtonEventArgs e)
     {
@@ -167,7 +170,7 @@ namespace PrintCat
       //double _h = canvasDim["Height"] - offsetY;
       double _leftEdgeX = imageDimension.left;
       double _topEdgeY = imageDimension.top;
-      double _rightEdgeX = imageDimension.left + imageDimension.width-offsetX;
+      double _rightEdgeX = imageDimension.left + imageDimension.width - offsetX;
       double _botttomEdgeY = imageDimension.top + imageDimension.height - offsetY;
       pos.Y = pos.Y > _botttomEdgeY ? _botttomEdgeY : pos.Y;
       pos.Y = pos.Y < _topEdgeY ? _topEdgeY : pos.Y;
@@ -203,12 +206,21 @@ namespace PrintCat
       selectionBox.Visibility = Visibility.Collapsed;
     }
 
-    private Dictionary<String,double> _getCanvasDim(){
-      Dictionary<String,double> result = new Dictionary<String,double>();
+    private Dictionary<String, double> _getCanvasDim()
+    {
+      Dictionary<String, double> result = new Dictionary<String, double>();
       result.Add("Width", theCanvas.ActualWidth);
       result.Add("Height", theCanvas.ActualHeight);
       return result;
 
+    }
+
+    public void DisplayImage(String uri)
+    {
+      BitmapSource bitmapImage = new BitmapImage(new Uri(uri));
+      setDisplayImage(bitmapImage);
+      hasImage = true;
+      currentImageHandler = new CurrentImageHandler(this, uri);
     }
 
 
@@ -217,18 +229,15 @@ namespace PrintCat
       double _imageW = bitmapImage.Width;
       double _imageH = bitmapImage.Height;
       theCanvas.Cursor = Cursors.Cross;
-      hasImage = true;
-
       Dictionary<String, double> canvasDim = _getCanvasDim();
-      imageDimension= getImageDim(_imageW, _imageH);
-      
-      Console.WriteLine(_imageW + " : " + _imageH);
+      imageDimension = getImageDim(_imageW, _imageH);
+      Console.WriteLine(String.Format("Display image {0}X{1}", _imageW, _imageH));
       theImage.Source = bitmapImage;
       theImage.Width = imageDimension.width;
       theImage.Height = imageDimension.height;
       Canvas.SetLeft(theImage, imageDimension.left);
       Canvas.SetTop(theImage, imageDimension.top);
-      this.currentImageHandler = new CurrentImageHandler(theImage);
+
 
     }
 
@@ -249,7 +258,7 @@ namespace PrintCat
           // 这里还是垂直照片
           result = new ImageDimension(newWidth, canvasHeight, (canvasWidth - newWidth) / 2, 0, false);
         }
-       
+
       }
       else
       {
@@ -259,21 +268,27 @@ namespace PrintCat
       }
       return result;
     }
+
     //点击剪裁
     private void btn_crop_Click(object sender, RoutedEventArgs e)
     {
-      Console.WriteLine("image source "+theImage.Source.GetType().Name);
-      BitmapSource bitmapSource = theImage.Source as BitmapSource;
-      double scaleX = bitmapSource.Width / imageDimension.width;
-      double scaleY = bitmapSource.Height / imageDimension.height;
+
+      BitmapSource bitmapSource = currentImageHandler.GetCropedImageSource();
+      Console.WriteLine(String.Format("Croped image size pixel-{0}X{1} ,size-{2}X{3} ", bitmapSource.PixelWidth, bitmapSource.PixelHeight, bitmapSource.Width, bitmapSource.Height));
+      double scaleX = bitmapSource.PixelWidth / imageDimension.width;
+      double scaleY = bitmapSource.PixelHeight / imageDimension.height;
       int width = (int)(selectionBox.Width * scaleX);
       int height = (int)(selectionBox.Height * scaleY);
       double selectBoxLeft = Canvas.GetLeft(selectionBox);
       double selectBoxTop = Canvas.GetTop(selectionBox);
       int left = (int)((selectBoxLeft - imageDimension.left) * scaleX);
       int top = (int)((selectBoxTop - imageDimension.top) * scaleY);
+      Console.WriteLine(String.Format("Cropped image size is {0}X{1}", width, height));
+
       CroppedBitmap croppedBitmap = new CroppedBitmap(bitmapSource, new Int32Rect(left, top, width, height));
-      Console.WriteLine(left + " , " + top + " , " + width + " , " + height);
+      Image croppedImage = new Image();
+      croppedImage.Source = croppedBitmap;
+      currentImageHandler.CroppedImage = croppedImage;
       setDisplayImage(croppedBitmap);
       clearSelectBox();
 
@@ -281,15 +296,15 @@ namespace PrintCat
 
     private void Button_Filter_Click(object sender, RoutedEventArgs e)
     {
-        //currentImageHandler.ColorFitler.ExecuteFitler();
+      //currentImageHandler.ColorFitler.ExecuteFitler();
     }
 
-    internal void ExceRGBFilter(List<ColorRange> filters)
+    internal void ExceRGBFilter(ChannelFiltering filter)
     {
-        if (currentImageHandler != null)
-        {
-          currentImageHandler.ColorFitler.ExecuteFitler(filters);
-        }
+      if (currentImageHandler != null)
+      {
+        currentImageHandler.ColorFitler.ExecuteFitler(filter);
+      }
     }
   }
 }

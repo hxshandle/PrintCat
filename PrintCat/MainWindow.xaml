@@ -21,9 +21,20 @@
       <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
       <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></GridSplitter>
       <StackPanel Grid.Column="2" Name="propertyPanel">
-                <Slider Maximum="255" Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged"/>
+        <DockPanel>
+          <TextBlock>R</TextBlock>
+          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255"/>
+        </DockPanel>
+        <DockPanel>
+          <TextBlock>G</TextBlock>
+          <Slider Maximum="255" x:Name="GSlider" SmallChange="1" ValueChanged="GSlider_ValueChanged" Value="255"/>
+        </DockPanel>
+        <DockPanel>
+          <TextBlock>B</TextBlock>
+          <Slider Maximum="255" x:Name="BSlider" SmallChange="1" ValueChanged="BSlider_ValueChanged" Value="255"/>
+        </DockPanel>
 
-            </StackPanel>
+      </StackPanel>
     </Grid>
     
     <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" BorderBrush="#FFFB6969" Background="#FFEA1C1C">

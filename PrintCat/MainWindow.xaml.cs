@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Controls.Primitives;
+using AForge.Imaging.Filters;
 
 namespace PrintCat
 {
@@ -38,7 +39,8 @@ namespace PrintCat
         Image image = (Image)e.OriginalSource;
         String source = image.Source.ToString();
         theImageControl.clearSelectBox();
-        theImageControl.setDisplayImage(new BitmapImage(new Uri(source)));
+        //theImageControl.setDisplayImage(new BitmapImage(new Uri(source)));
+        theImageControl.DisplayImage(source);
       }
       catch (Exception ex)
       {
@@ -46,16 +48,35 @@ namespace PrintCat
       }
     }
 
-    private void RSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    private void ApplayRGBFilter(String type, RoutedPropertyChangedEventArgs<double> e)
     {
+      if (!theImageControl.HasImage)
+      {
+        return;
+      }
       int OldValue = (int)e.OldValue;
       int NewValue = (int)e.NewValue;
       if (OldValue == NewValue) return;
-      Console.WriteLine(String.Format("current value is {0} -> {1}", (int)e.OldValue, (int)e.NewValue));
-      ColorRange Rrange = new ColorRange(0, NewValue, ColorRangeType.RED);
-      List<ColorRange> filters = new List<ColorRange>();
-      filters.Add(Rrange);
-      theImageControl.ExceRGBFilter(filters);
+      ChannelFiltering filter = new ChannelFiltering();
+      filter.Red = new AForge.IntRange(0, (int)RSlider.Value);
+      filter.Green = new AForge.IntRange(0, (int)GSlider.Value);
+      filter.Blue = new AForge.IntRange(0, (int)BSlider.Value);
+      theImageControl.ExceRGBFilter(filter);
+    }
+
+    private void RSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+      ApplayRGBFilter("R", e);
+    }
+
+    private void GSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+      ApplayRGBFilter("G", e);
+    }
+
+    private void BSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    {
+      ApplayRGBFilter("B", e);
     }
   }
 }
