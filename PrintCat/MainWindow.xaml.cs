@@ -78,5 +78,15 @@ namespace PrintCat
     {
       ApplayRGBFilter("B", e);
     }
+
+    private void lightLess_Click(object sender, RoutedEventArgs e)
+    {
+      theImageControl.Lightness(-1);
+    }
+
+    private void lightMore_Click(object sender, RoutedEventArgs e)
+    {
+      theImageControl.Lightness(1);
+    }
   }
 }

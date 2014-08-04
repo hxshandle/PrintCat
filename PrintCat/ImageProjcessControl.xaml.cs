@@ -53,6 +53,7 @@ namespace PrintCat
     Point selectBoxPos = new Point();
     ImageDimension imageDimension = null;
     CurrentImageHandler currentImageHandler = null;
+    int brightnessAdjValue = 10;
 
 
     private bool isRectangleMove(MouseButtonEventArgs e)
@@ -220,6 +221,7 @@ namespace PrintCat
       BitmapSource bitmapImage = new BitmapImage(new Uri(uri));
       setDisplayImage(bitmapImage);
       hasImage = true;
+      brightnessAdjValue = 10;
       currentImageHandler = new CurrentImageHandler(this, uri);
     }
 
@@ -305,6 +307,24 @@ namespace PrintCat
       {
         currentImageHandler.ColorFitler.ExecuteFitler(filter);
       }
+    }
+
+    internal void Lightness(int p)
+    {
+      if (!this.HasImage)
+      {
+        return;
+      }
+      brightnessAdjValue += p * 5;
+      //brightnessAdjValue = brightnessAdjValue > 1 ? 1 : brightnessAdjValue;
+      //brightnessAdjValue = brightnessAdjValue < -1 ? -1 : brightnessAdjValue;
+      //BrightnessCorrection
+      Console.WriteLine("brightnessAdjValue->" + brightnessAdjValue);
+      BrightnessCorrection bc = new BrightnessCorrection(brightnessAdjValue);
+      currentImageHandler.ColorFitler.ExecuteFitler(bc);
+
+      
+        
     }
   }
 }

@@ -15,6 +15,7 @@ namespace PrintCat
 
     public Image CurrentImage { set; get; }
     public ImageFitler ColorFitler { set; get; }
+     
     private String OriginalUri { set; get; }
     private BitmapSource OriginalBitmapSource { get; set; }
     private ImageProjcessControl Control { get; set; }

@@ -33,7 +33,10 @@
           <TextBlock>B</TextBlock>
           <Slider Maximum="255" x:Name="BSlider" SmallChange="1" ValueChanged="BSlider_ValueChanged" Value="255"/>
         </DockPanel>
-
+        <StackPanel Orientation="Horizontal" >
+          <Button Name="lightLess" Content="变暗" Click="lightLess_Click"></Button>
+          <Button Name="lightMore" Content="变亮" Click="lightMore_Click"></Button>
+        </StackPanel>
       </StackPanel>
     </Grid>
     

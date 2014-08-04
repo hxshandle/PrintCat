@@ -45,15 +45,8 @@ namespace PrintCat
       this.currentImageHandler = currentImageHandler;
     }
 
-    public void ExecuteFitler(ChannelFiltering filter)
+    public void ExecuteFitler(IInPlaceFilter filter)
     {
-      //BitmapSource bs = currentImageHandler.CurrentImage.Source as BitmapSource;
-      List<System.Windows.Media.Color> colors = new List<System.Windows.Media.Color>();
-      colors.Add(System.Windows.Media.Colors.WhiteSmoke);
-      BitmapPalette bp = new BitmapPalette(colors);
-      //filter.Red = new IntRange(100, 255);
-      //filter.Green = new IntRange(20, 100);
-      //filter.Blue = new IntRange(1, 100);
       BitmapSource bitmapSource = currentImageHandler.GetCropedImageSource().Clone();
       Bitmap bitmap = ImageHelper.BitmapFromSource(bitmapSource);
 
