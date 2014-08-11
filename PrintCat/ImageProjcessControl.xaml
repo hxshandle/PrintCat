@@ -13,25 +13,24 @@
 
     <StackPanel Grid.Column="0" Background="#CC475059" Width="60" Margin="10,10,0,10" HorizontalAlignment="Center">
       <Button Content="剪裁" VerticalAlignment="Center" Margin="5,0" Width="40" UseLayoutRounding="True" BorderBrush="{x:Null}" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="btn_crop_Click"/>
-            <Button Content="Filter" VerticalAlignment="Center" Margin="5,0" Width="40" UseLayoutRounding="True" BorderBrush="{x:Null}" BorderThickness="0" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" Foreground="{DynamicResource {x:Static SystemColors.ControlLightLightBrushKey}}" Click="Button_Filter_Click"/>
 
-        </StackPanel>
-  <Canvas Grid.Column="1" 
-              Name="theCanvas"
-              Background="#FF128742" 
-              Margin="10"
+    </StackPanel>
+    <Border Grid.Column="1" Margin="10" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" BorderThickness="1" >
+    <Canvas 
+              Name="theCanvas" 
+             
               MouseDown="Grid_MouseDown"
               MouseUp="Grid_MouseUp"
               MouseMove="Grid_MouseMove">
-    <Image
-      Name="theImage"
-      ></Image>
-    <Rectangle
+      <Image Name="theImage"/>
+      <Rectangle
             x:Name="selectionBox"
             Visibility="Collapsed"
             Stroke="Black"
             StrokeThickness="1"
             />
+        
   </Canvas>
+    </Border>
   </Grid>
 </UserControl>

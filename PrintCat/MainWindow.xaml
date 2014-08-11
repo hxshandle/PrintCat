@@ -17,29 +17,37 @@
         <ColumnDefinition Width="Auto"></ColumnDefinition>
         <ColumnDefinition Width="300"></ColumnDefinition>
       </Grid.ColumnDefinitions>
-      
+
       <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
       <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></GridSplitter>
-      <StackPanel Grid.Column="2" Name="propertyPanel">
+      <StackPanel Grid.Column="2" Name="propertyPanel" Margin="10">
         <DockPanel>
           <TextBlock>R</TextBlock>
-          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255"/>
+          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255" >
+            <Slider.Foreground>
+              <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="#FF8D3232" Offset="1"/>
+              </LinearGradientBrush>
+            </Slider.Foreground>
+          </Slider>
         </DockPanel>
         <DockPanel>
           <TextBlock>G</TextBlock>
           <Slider Maximum="255" x:Name="GSlider" SmallChange="1" ValueChanged="GSlider_ValueChanged" Value="255"/>
+
         </DockPanel>
         <DockPanel>
           <TextBlock>B</TextBlock>
           <Slider Maximum="255" x:Name="BSlider" SmallChange="1" ValueChanged="BSlider_ValueChanged" Value="255"/>
         </DockPanel>
         <StackPanel Orientation="Horizontal" >
-          <Button Name="lightLess" Content="变暗" Click="lightLess_Click"></Button>
+          <Button Name="lightLess" Content="变暗" Click="lightLess_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"></Button>
           <Button Name="lightMore" Content="变亮" Click="lightMore_Click"></Button>
         </StackPanel>
       </StackPanel>
     </Grid>
-    
+
     <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Hidden" BorderBrush="#FFFB6969" Background="#FFEA1C1C">
       <ListView Name="lstImage" Margin="0" BorderBrush="{x:Null}" >
         <ListView.ItemContainerStyle>
