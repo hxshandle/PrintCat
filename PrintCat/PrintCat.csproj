@@ -99,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\ColorBalanceControl.xaml.cs">
+      <DependentUpon>ColorBalanceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SliderColorProperties.cs" />
     <Compile Include="CurrentImageHandler.cs" />
     <Compile Include="ImageFitler.cs" />
     <Compile Include="ImageHelper.cs" />
@@ -106,6 +110,13 @@
       <DependentUpon>ImageProjcessControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResizingAdorner.cs" />
+    <Compile Include="Utils\BitmapColorBalance.cs" />
+    <Compile Include="Utils\PrintCatImage.cs" />
+    <Compile Include="Utils\PrintCatImageImplement.cs" />
+    <Page Include="Components\ColorBalanceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImageProjcessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,7 +135,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StyleDictionary.xaml">
+    <Page Include="Styles\SliderDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

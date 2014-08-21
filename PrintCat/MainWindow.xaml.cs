@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using System.Windows.Controls.Primitives;
 using AForge.Imaging.Filters;
+using PrintCat.Components;
+using PrintCat.Utils;
 
 namespace PrintCat
 {
@@ -38,6 +40,8 @@ namespace PrintCat
       {
         Image image = (Image)e.OriginalSource;
         String source = image.Source.ToString();
+
+        PrintCatImage.Init(image.Source as BitmapSource, theImageControl.theImage);
         theImageControl.clearSelectBox();
         //theImageControl.setDisplayImage(new BitmapImage(new Uri(source)));
         theImageControl.DisplayImage(source);
