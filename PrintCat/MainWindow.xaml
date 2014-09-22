@@ -15,15 +15,15 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="300"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
       </Grid.ColumnDefinitions>
 
       <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
-      <GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></GridSplitter>
-      <StackPanel Grid.Column="2" Name="propertyPanel" Margin="10">
+      <!--GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></-->
+      <StackPanel Grid.Column="2" Name="propertyPanel" Margin="10" Width="200">
         <DockPanel>
           <TextBlock>R</TextBlock>
-          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255" >
+          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255" Style="{DynamicResource SliderStyle1}" >
             <Slider.Foreground>
               <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black" Offset="0"/>
