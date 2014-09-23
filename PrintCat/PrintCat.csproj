@@ -110,7 +110,6 @@
       <DependentUpon>ImageProjcessControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResizingAdorner.cs" />
-    <Compile Include="UI\SliderColorProperties.cs" />
     <Compile Include="Utils\BitmapColorBalance.cs" />
     <Compile Include="Utils\PrintCatImage.cs" />
     <Compile Include="Utils\PrintCatImageImplement.cs" />
@@ -136,10 +135,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Styles\SliderDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Style\SliderDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
