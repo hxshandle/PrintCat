@@ -16,7 +16,7 @@
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"></ColumnDefinition>
         <ColumnDefinition Width="Auto"></ColumnDefinition>
-        <ColumnDefinition Width="200"></ColumnDefinition>
+        <ColumnDefinition Width="250"></ColumnDefinition>
       </Grid.ColumnDefinitions>
 
       <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
@@ -25,26 +25,7 @@
         <DockPanel>
           <lcmp:ColorBalanceControl/>
         </DockPanel>
-        <DockPanel>
-          <TextBlock>R</TextBlock>
-          <Slider Maximum="255" x:Name="RSlider" SmallChange="1" ValueChanged="RSlider_ValueChanged" Value="255" >
-            <Slider.Foreground>
-              <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="#FF8D3232" Offset="1"/>
-              </LinearGradientBrush>
-            </Slider.Foreground>
-          </Slider>
-        </DockPanel>
-        <DockPanel>
-          <TextBlock>G</TextBlock>
-          <Slider Maximum="255" x:Name="GSlider" SmallChange="1" ValueChanged="GSlider_ValueChanged" Value="255"/>
 
-        </DockPanel>
-        <DockPanel>
-          <TextBlock>B</TextBlock>
-          <Slider Maximum="255" x:Name="BSlider" SmallChange="1" ValueChanged="BSlider_ValueChanged" Value="255"/>
-        </DockPanel>
         <StackPanel Orientation="Horizontal" >
           <Button Name="lightLess" Content="变暗" Click="lightLess_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"></Button>
           <Button Name="lightMore" Content="变亮" Click="lightMore_Click"></Button>

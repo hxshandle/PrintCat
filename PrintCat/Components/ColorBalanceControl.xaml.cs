@@ -77,8 +77,15 @@ namespace PrintCat.Components
       }
       else
       {
-        PrintCatImage.ApplyColorBalance(adjRValueP, adjGValueP, adjBValueP);
+        PrintCatImage.ApplyColorBalance(adjBValueP, adjGValueP, adjRValueP);
       }
+    }
+
+    private void Reset_Click(object sender, RoutedEventArgs e)
+    {
+      RSlider.Value = 0;
+      GSlider.Value = 0;
+      BSlider.Value = 0;
     }
   }
 }

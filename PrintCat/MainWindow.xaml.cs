@@ -52,36 +52,7 @@ namespace PrintCat
       }
     }
 
-    private void ApplayRGBFilter(String type, RoutedPropertyChangedEventArgs<double> e)
-    {
-      if (!theImageControl.HasImage)
-      {
-        return;
-      }
-      int OldValue = (int)e.OldValue;
-      int NewValue = (int)e.NewValue;
-      if (OldValue == NewValue) return;
-      ChannelFiltering filter = new ChannelFiltering();
-      filter.Red = new AForge.IntRange(0, (int)RSlider.Value);
-      filter.Green = new AForge.IntRange(0, (int)GSlider.Value);
-      filter.Blue = new AForge.IntRange(0, (int)BSlider.Value);
-      theImageControl.ExceRGBFilter(filter);
-    }
 
-    private void RSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    {
-      ApplayRGBFilter("R", e);
-    }
-
-    private void GSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    {
-      ApplayRGBFilter("G", e);
-    }
-
-    private void BSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-    {
-      ApplayRGBFilter("B", e);
-    }
 
     private void lightLess_Click(object sender, RoutedEventArgs e)
     {
