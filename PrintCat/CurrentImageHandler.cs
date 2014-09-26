@@ -24,13 +24,12 @@ namespace PrintCat
 
 
 
-    public CurrentImageHandler(ImageProjcessControl control, String uri)
+    public CurrentImageHandler(ImageProjcessControl control, BitmapSource originalBitmapSource)
     {
       // TODO: Complete member initialization
       Control = control;
       ColorFitler = new ImageFitler(this);
-      OriginalUri = uri;
-      OriginalBitmapSource = new BitmapImage(new Uri(OriginalUri));
+      OriginalBitmapSource = originalBitmapSource;
       CurrentImage = control.theImage;
       CroppedImage = null;
     }

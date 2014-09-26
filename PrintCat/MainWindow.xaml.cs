@@ -43,8 +43,7 @@ namespace PrintCat
 
         PrintCatImage.Init(image.Source as BitmapSource, theImageControl.theImage);
         theImageControl.clearSelectBox();
-        //theImageControl.setDisplayImage(new BitmapImage(new Uri(source)));
-        theImageControl.DisplayImage(source);
+        theImageControl.DisplayImage(image.Source as BitmapSource);
       }
       catch (Exception ex)
       {
@@ -63,5 +62,11 @@ namespace PrintCat
     {
       theImageControl.Lightness(1);
     }
+
+    private void MetroWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+      theImageControl.Resize();
+    }
+
   }
 }

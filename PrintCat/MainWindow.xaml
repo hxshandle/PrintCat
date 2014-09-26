@@ -5,6 +5,7 @@
         xmlns:local="clr-namespace:PrintCat"
         xmlns:lcmp="clr-namespace:PrintCat.Components"
         Icon="cat.ico"
+        SizeChanged="MetroWindow_SizeChanged"
         Title="三菱打印系统" Height="600" Width="800" ShowIconOnTitleBar="True" EnableDWMDropShadow="True">
   <Grid ShowGridLines="True">
     <Grid.RowDefinitions>
@@ -29,6 +30,10 @@
         <StackPanel Orientation="Horizontal" >
           <Button Name="lightLess" Content="变暗" Click="lightLess_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"></Button>
           <Button Name="lightMore" Content="变亮" Click="lightMore_Click"></Button>
+        </StackPanel>
+        
+        <StackPanel>
+          <lcmp:PrintControl/>
         </StackPanel>
       </StackPanel>
     </Grid>

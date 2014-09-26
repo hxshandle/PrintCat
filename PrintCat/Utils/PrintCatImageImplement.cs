@@ -34,5 +34,14 @@ namespace PrintCat.Utils
     {
       ImageCtrl.Source = OriginalBitmapSource;
     }
+
+    internal void PrintImage()
+    {
+      PrintImage pi = new PrintImage();
+      System.Windows.Controls.Image pImage = new System.Windows.Controls.Image();
+      pImage.Source = ImageCtrl.Source;
+      
+      pi.Print(pImage);
+    }
   }
 }

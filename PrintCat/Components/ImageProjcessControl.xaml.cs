@@ -216,13 +216,21 @@ namespace PrintCat
 
     }
 
-    public void DisplayImage(String uri)
+    public void Resize()
     {
-      BitmapSource bitmapImage = new BitmapImage(new Uri(uri));
-      setDisplayImage(bitmapImage);
+      if (hasImage)
+      {
+        this.DisplayImage(theImage.Source as BitmapSource);
+      }
+    }
+
+    public void DisplayImage(BitmapSource source)
+    {
+      //BitmapSource bitmapImage = new BitmapImage(new Uri(uri));
+      setDisplayImage(source);
       hasImage = true;
       brightnessAdjValue = 10;
-      currentImageHandler = new CurrentImageHandler(this, uri);
+      currentImageHandler = new CurrentImageHandler(this, source);
     }
 
 

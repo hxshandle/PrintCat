@@ -102,22 +102,30 @@
     <Compile Include="Components\ColorBalanceControl.xaml.cs">
       <DependentUpon>ColorBalanceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\PrintControl.xaml.cs">
+      <DependentUpon>PrintControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\SliderColorProperties.cs" />
     <Compile Include="CurrentImageHandler.cs" />
     <Compile Include="ImageFitler.cs" />
     <Compile Include="ImageHelper.cs" />
-    <Compile Include="ImageProjcessControl.xaml.cs">
+    <Compile Include="Components\ImageProjcessControl.xaml.cs">
       <DependentUpon>ImageProjcessControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ResizingAdorner.cs" />
     <Compile Include="Utils\BitmapColorBalance.cs" />
     <Compile Include="Utils\PrintCatImage.cs" />
     <Compile Include="Utils\PrintCatImageImplement.cs" />
+    <Compile Include="Utils\PrintImage.cs" />
     <Page Include="Components\ColorBalanceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ImageProjcessControl.xaml">
+    <Page Include="Components\PrintControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ImageProjcessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

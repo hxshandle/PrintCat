@@ -27,5 +27,10 @@ namespace PrintCat.Utils
     {
       PrintCatImageIns.ApplyColorBalance((byte)bValue, (byte)gValue, (byte)rValue);
     }
+
+    internal static void PrintImage()
+    {
+      PrintCatImageIns.PrintImage();
+    }
   }
 }
