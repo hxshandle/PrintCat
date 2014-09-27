@@ -16,10 +16,11 @@ namespace PrintCat.Utils
 
     internal void Print(System.Windows.Controls.Image ImageCtrl)
     {
-       PrintDialog printDialog = new PrintDialog();
-      if (printDialog.ShowDialog() == true)
+      PrintDialog printDlg = new PrintDialog();
+
+      if (printDlg.ShowDialog() == true)
       {
-        printDialog.PrintVisual(ImageCtrl, "My First Print Job");
+        printDlg.PrintVisual(ImageCtrl, "My First Print Job");
       }
     }
   }
