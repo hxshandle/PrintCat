@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PrintCat.Components;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace PrintCat.Utils
   {
 
     private static PrintCatImageImplement PrintCatImageIns;
+
+    public static ColorBalanceControl ColorBalanceCtrl { get; set; }
+    public static ImageProjcessControl ImageProgressCtrl { get; set; }
+    public static CropImageControl CropImageCtrl { get; set; }
     internal static void ShoworiginalImage()
     {
       PrintCatImageIns.ShowOriginalImage();
@@ -31,6 +36,17 @@ namespace PrintCat.Utils
     internal static void PrintImage()
     {
       PrintCatImageIns.PrintImage();
+    }
+    internal static void updateImageCtrl(System.Windows.Controls.Image img)
+    {
+      PrintCatImageIns.OriginalBitmapSource = img.Source as BitmapSource;
+      PrintCatImageIns.ProcessedBitmapSource = img.Source as BitmapSource; 
+    }
+
+
+    internal static BitmapSource getProcessedImage()
+    {
+      return PrintCatImageIns.ProcessedBitmapSource;
     }
   }
 }

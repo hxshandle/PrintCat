@@ -23,13 +23,14 @@
       <local:ImageProjcessControl x:Name="theImageControl"></local:ImageProjcessControl>
       <!--GridSplitter Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="center" Width="2 " Background="#FF292323"></-->
       <StackPanel Grid.Column="2" Name="propertyPanel" Margin="10" Width="200">
-        <DockPanel>
-          <lcmp:ColorBalanceControl/>
-        </DockPanel>
+        <StackPanel>
+          <lcmp:CropImageControl x:Name="CropImageCtrl" Height="120"/>
+          <lcmp:ColorBalanceControl x:Name="ColorBalanceCtrl"/>
+        </StackPanel>
 
         <StackPanel Orientation="Horizontal" >
-          <Button Name="lightLess" Content="变暗" Click="lightLess_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"></Button>
-          <Button Name="lightMore" Content="变亮" Click="lightMore_Click"></Button>
+          <Button Name="lightLess" Width="100" Content="变暗" Click="lightLess_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"></Button>
+          <Button Name="lightMore" Width="100" Content="变亮" Click="lightMore_Click"></Button>
         </StackPanel>
         
         <StackPanel>

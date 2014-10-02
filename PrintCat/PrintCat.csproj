@@ -104,6 +104,9 @@
     <Compile Include="Components\ColorBalanceControl.xaml.cs">
       <DependentUpon>ColorBalanceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\CropImageControl.xaml.cs">
+      <DependentUpon>CropImageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\PrintControl.xaml.cs">
       <DependentUpon>PrintControl.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
     <Compile Include="Utils\PrintCatImageImplement.cs" />
     <Compile Include="Utils\PrintImage.cs" />
     <Page Include="Components\ColorBalanceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\CropImageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

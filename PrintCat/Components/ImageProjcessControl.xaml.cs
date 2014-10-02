@@ -1,4 +1,5 @@
 ﻿using AForge.Imaging.Filters;
+using PrintCat.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +104,8 @@ namespace PrintCat
       // Release the mouse capture and stop tracking it.
       mouseDown = false;
       theCanvas.ReleaseMouseCapture();
+
+      PrintCatImage.CropImageCtrl.enableCrop();
 
       // Hide the drag selection box.
       //selectionBox.Visibility = Visibility.Collapsed;
@@ -247,6 +250,8 @@ namespace PrintCat
       theImage.Height = imageDimension.height;
       Canvas.SetLeft(theImage, imageDimension.left);
       Canvas.SetTop(theImage, imageDimension.top);
+      PrintCatImage.updateImageCtrl(theImage);
+      
 
 
     }
@@ -279,12 +284,11 @@ namespace PrintCat
       return result;
     }
 
-    //点击剪裁
-    private void btn_crop_Click(object sender, RoutedEventArgs e)
+    public void CropCustomlizeImage()
     {
-
+      PrintCatImage.CropImageCtrl.disableCrop();
       BitmapSource bitmapSource = currentImageHandler.GetCropedImageSource();
-      Console.WriteLine(String.Format("Croped image size pixel-{0}X{1} ,size-{2}X{3} ", bitmapSource.PixelWidth, bitmapSource.PixelHeight, bitmapSource.Width, bitmapSource.Height));
+      //Console.WriteLine(String.Format("Croped image size pixel-{0}X{1} ,size-{2}X{3} ", bitmapSource.PixelWidth, bitmapSource.PixelHeight, bitmapSource.Width, bitmapSource.Height));
       double scaleX = bitmapSource.PixelWidth / imageDimension.width;
       double scaleY = bitmapSource.PixelHeight / imageDimension.height;
       int width = (int)(selectionBox.Width * scaleX);
@@ -293,7 +297,7 @@ namespace PrintCat
       double selectBoxTop = Canvas.GetTop(selectionBox);
       int left = (int)((selectBoxLeft - imageDimension.left) * scaleX);
       int top = (int)((selectBoxTop - imageDimension.top) * scaleY);
-      Console.WriteLine(String.Format("Cropped image size is {0}X{1}", width, height));
+      //Console.WriteLine(String.Format("Cropped image size is {0}X{1}", width, height));
 
       CroppedBitmap croppedBitmap = new CroppedBitmap(bitmapSource, new Int32Rect(left, top, width, height));
       Image croppedImage = new Image();
@@ -301,8 +305,8 @@ namespace PrintCat
       currentImageHandler.CroppedImage = croppedImage;
       setDisplayImage(croppedBitmap);
       clearSelectBox();
-
     }
+
 
     private void Button_Filter_Click(object sender, RoutedEventArgs e)
     {
@@ -333,6 +337,15 @@ namespace PrintCat
 
       
         
+    }
+
+    internal void CropFixedImage(CroppedBitmap croppedBitmap)
+    {
+      Image croppedImage = new Image();
+      croppedImage.Source = croppedBitmap;
+      currentImageHandler.CroppedImage = croppedImage;
+      setDisplayImage(croppedBitmap);
+      clearSelectBox();
     }
   }
 }

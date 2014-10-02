@@ -21,6 +21,35 @@ namespace PrintCat
       // TODO: Complete member initialization
       this.lstImage = lstImage;
       this.initImageList();
+      spyer.ImageListView = this;
+    }
+
+
+    public delegate void DeleFunc(String path);
+    
+    private void _add(String path)
+    {
+      Image img = new Image();
+      BitmapImage bitImg = new BitmapImage(new Uri(path));
+      img.Source = bitImg;
+      img.Width = 64;
+      img.Height = 64;
+      this.lstImage.Items.Add(img);
+      //lstImage.SelectedItem = lstImage.Items.GetItemAt(lstImage.Items.Count - 1);
+      lstImage.Items.MoveCurrentToFirst();
+    }
+
+
+    public void AddImage(String path)
+    {
+      var searchPattern = new Regex(@"$(?<=\.(png|jpg))", RegexOptions.IgnoreCase);
+      FileInfo f = new FileInfo(path);
+      if (searchPattern.IsMatch(f.Name))
+      {
+        //_add(f.FullName);
+        System.Windows.Application.Current.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
+                                                        new DeleFunc(_add), f.FullName);
+      }
     }
 
     private void initImageList()
@@ -33,18 +62,13 @@ namespace PrintCat
       {
         if (searchPattern.IsMatch(f.Name))
         {
-          Console.WriteLine("image -> " + f.FullName);
-         
-          Image img = new Image();
-          BitmapImage bitImg = new BitmapImage(new Uri(f.FullName));
-
-          img.Source = bitImg;
-
-          img.Width = 64;
-          img.Height = 64;
-          this.lstImage.Items.Add(img);
+          //Console.WriteLine("image -> " + f.FullName);
+          _add(f.FullName);
+          
         }
       }
     }
+
+
   }
 }

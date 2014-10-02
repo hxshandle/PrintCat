@@ -13,6 +13,8 @@ namespace PrintCat
     private string[] extensions = { ".jpg", ".png", ".jpeg" };
 
     static String spyPath = PrintCat.Properties.Settings.Default.SpyFolder;
+    public ImageListView ImageListView;
+
 
 
     public FolderSpy()
@@ -31,7 +33,9 @@ namespace PrintCat
       var ext = (Path.GetExtension(e.FullPath) ?? string.Empty).ToLower();
       if (extensions.Any(ext.Equals))
       {
-        Console.WriteLine("new file created");
+        ImageListView.AddImage(e.FullPath);
+        
+        //Console.WriteLine("new file created");
       }
       
     }

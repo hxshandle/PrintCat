@@ -16,9 +16,7 @@ using System.Windows.Shapes;
 
 namespace PrintCat.Components
 {
-  /// <summary>
-  /// Interaction logic for ColorBalanceControl.xaml
-  /// </summary>
+
   public partial class ColorBalanceControl : UserControl
   {
     public ColorBalanceControl()
@@ -83,9 +81,22 @@ namespace PrintCat.Components
 
     private void Reset_Click(object sender, RoutedEventArgs e)
     {
+      RestRGB();
+    }
+
+    internal void RestRGB()
+    {
       RSlider.Value = 0;
       GSlider.Value = 0;
       BSlider.Value = 0;
+    }
+
+    internal void enableActions()
+    {
+      RSlider.IsEnabled = true;
+      GSlider.IsEnabled = true;
+      BSlider.IsEnabled = true;
+      resetBtn.IsEnabled = true;
     }
   }
 }

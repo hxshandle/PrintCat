@@ -42,8 +42,15 @@ namespace PrintCat
         String source = image.Source.ToString();
 
         PrintCatImage.Init(image.Source as BitmapSource, theImageControl.theImage);
+        PrintCatImage.ImageProgressCtrl = theImageControl;
+        PrintCatImage.CropImageCtrl = CropImageCtrl;
+        PrintCatImage.ColorBalanceCtrl = ColorBalanceCtrl;
+
         theImageControl.clearSelectBox();
         theImageControl.DisplayImage(image.Source as BitmapSource);
+        CropImageCtrl.enableActions();
+        ColorBalanceCtrl.enableActions();
+        ColorBalanceCtrl.RestRGB();
       }
       catch (Exception ex)
       {

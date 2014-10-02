@@ -11,23 +11,25 @@ namespace PrintCat.Utils
   class PrintCatImageImplement
   {
     public BitmapSource OriginalBitmapSource { get; set; }
-    public Bitmap OriginalBitmap { get; set; }
+    //public Bitmap OriginalBitmap { get; set; }
+    public BitmapSource ProcessedBitmapSource { get; set; }
     public System.Windows.Controls.Image ImageCtrl { get; set; }
 
 
     public PrintCatImageImplement(BitmapSource source, System.Windows.Controls.Image image)
     {
       this.OriginalBitmapSource = source;
+      this.ProcessedBitmapSource = source;
       this.ImageCtrl = image;
-      this.OriginalBitmap = ImageHelper.BitmapFromSource(source);
+      //this.OriginalBitmap = ImageHelper.BitmapFromSource(source);
       
     }
 
     internal void ApplyColorBalance(int rValue, int gValue, int bValue)
     {
-      Bitmap newBitmap = BitmapColorBalance.ColorBalance(OriginalBitmap, (byte)bValue, (byte)gValue, (byte)rValue);
-      BitmapSource newSource = ImageHelper.ConvertBitmap(newBitmap);
-      ImageCtrl.Source = newSource;
+      Bitmap newBitmap = BitmapColorBalance.ColorBalance(ImageHelper.BitmapFromSource(OriginalBitmapSource), (byte)bValue, (byte)gValue, (byte)rValue);
+      BitmapSource ProcessedBitmapSource = ImageHelper.ConvertBitmap(newBitmap);
+      ImageCtrl.Source = ProcessedBitmapSource;
     }
 
     internal void ShowOriginalImage()
